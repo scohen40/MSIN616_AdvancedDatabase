@@ -53,7 +53,7 @@ SELECT [Date],
 	[IntraDayChange] = [Open] - [Close]
 FROM TS_DailyData 
 WHERE Ticker = 'DJI' 
-	AND ABS([Open] - [Close]) > 500 
+	AND [Open] - [Close] > 500 
 
 --7. Repeat #6, this time return all records where the absolute value of IntradayChange was greater than $500.00
 
