@@ -2,6 +2,9 @@
 -- Sarah Cohen
 
 /* AP Database */
+USE AP
+GO
+
 --1. Write a SELECT statement that returns from the Vendors table: VendorContactFName,VendorContactLName, and VendorName. 
 --Sort the result set by the last name, 
 SELECT VendorContactFName, VendorContactLName, VendorName 
@@ -37,6 +40,8 @@ ORDER BY VendorContactFName
 /* Finance Database */
 
 --4. Indicate that the queries below should be run against the Finance database.
+USE Finance
+GO
 
 --5. Select all columns from the TS_DailyData table.
 
