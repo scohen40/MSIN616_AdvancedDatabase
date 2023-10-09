@@ -44,6 +44,19 @@ ORDER BY g.AccountDescription, v.VendorName
 --ii. inv Invoice table
 --iii. ili InvoiceLineItems table
 --Sort the result set by Vendor, Date, Number, and #
+select * from Vendors order by VendorName
+select * from Invoices
+select * from InvoiceLineItems
+SELECT ven.VendorName AS [Vendor],
+	inv.InvoiceDate AS [Date],
+	inv.InvoiceNumber AS [Number],
+	ili.InvoiceSequence AS [#],
+	ili.InvoiceLineItemAmount AS [LineItem]
+FROM Vendors ven
+JOIN Invoices inv ON ven.VendorID = inv.VendorID
+JOIN InvoiceLineItems ili ON inv.InvoiceID = ili.InvoiceID
+ORDER BY [Vendor], [Date], [Number], [#]
+
 --4. Write a SELECT statement that returns two columns from the GLAccounts table: AccountNo and
 --AccountDescription. The result set should have one row for each account number that has never been used. Sort the result set by AccountNo. [Hint: use an outer join to the InvoiceLineItems table]
 --5. Use the UNION operator to generate a result set consisting of two columns from the Vendors table: VendorName and VendorState. 
