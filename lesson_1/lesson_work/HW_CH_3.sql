@@ -78,3 +78,10 @@ ORDER BY [IntraDayRange] DESC
 -- a. Write a SELECT statement that returns Three columns: Date, IntraDayChange , and IntraDayRange for Ticker = ‘DJI’
 -- b. where IntraDayRange is larger than $500.00.
 -- c. Make sure to format your output nicely and present the result set in the descending order of the Intra-day range.
+SELECT [Date],
+	[IntraDayChange] = [Open] - [Close],
+	[IntraDayRange] = [High] - [Low]
+FROM TS_DailyData 
+WHERE Ticker = 'DJI' 
+	AND [High] - [Low] > 500
+ORDER BY [IntraDayRange] DESC
