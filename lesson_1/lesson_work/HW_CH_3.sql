@@ -67,7 +67,12 @@ ORDER BY [IntraDayChange] DESC
 --8. Write a SELECT statement that returns two columns:
 -- a. Date and IntraDayRange defined as the difference between [High] and [Low] for Ticker = ‘DJI’ where this difference is larger than $500.00.
 -- b. Make sure to format your output nicely and present the result set in the descending order of the Intra-day range.
-
+SELECT [Date],
+	[IntraDayRange] = [High] - [Low]
+FROM TS_DailyData
+WHERE Ticker = 'DJI'
+	AND [High] - [Low] > 500
+ORDER BY [IntraDayRange] DESC
 
 --9. Combine queries #5 and #7:
 -- a. Write a SELECT statement that returns Three columns: Date, IntraDayChange , and IntraDayRange for Ticker = ‘DJI’
