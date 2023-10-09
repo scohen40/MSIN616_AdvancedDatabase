@@ -61,6 +61,7 @@ SELECT g.AccountNo, g.AccountDescription
 FROM GLAccounts g
 LEFT OUTER JOIN InvoiceLineItems i ON g.AccountNo = i.AccountNo 
 WHERE i.AccountNo IS NULL
+ORDER BY g.AccountNo
 
 --5. Use the UNION operator to generate a result set consisting of two columns from the Vendors table: VendorName and VendorState. 
 --If the vendor is in California, the VendorState should be “CA”; otherwise, the VendorState value should be “Outside CA”. Sort the result set by VendorName
