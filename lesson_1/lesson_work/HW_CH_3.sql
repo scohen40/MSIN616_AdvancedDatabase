@@ -44,6 +44,7 @@ USE Finance
 GO
 
 --5. Select all columns from the TS_DailyData table.
+SELECT * FROM TS_DailyData
 
 --6. Write a SELECT statement that returns two columns:
 --a. Date and IntraDayChange defined as the difference between [Close] and [Open] for Ticker = ‘DJI’ where this difference is larger than $500.00.
