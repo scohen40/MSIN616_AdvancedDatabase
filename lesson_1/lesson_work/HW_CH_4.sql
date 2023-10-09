@@ -13,8 +13,6 @@ GO
 -- c. InvoiceDate from the Invoices table,
 -- d. BalanceInvoiceTotal minus the sum of PaymentTotal and CreditTotal
 -- The result should have one row for each invoice with a non-zero balance. Sort the result by VendorName in ascending order.
-select * from Vendors
-select * from Invoices
 SELECT VendorName, 
 	InvoiceNumber, 
 	InvoiceDate,
@@ -28,7 +26,13 @@ ORDER BY VendorName ASC
 -- a. VendorName from the Vendors table,
 -- b. DefaultAccountNo from the Vendors table,
 -- c. AccountDescription from GLAccounts table
---The result should have one row for each vendor, with the account number and account description for the vendor’s default account number. Sort the result set by AccountDescription, then by VendorName
+--The result should have one row for each vendor, with the account number and account description for the vendor’s default account number. 
+--Sort the result set by AccountDescription, then by VendorName
+SELECT v.VendorName, v.DefaultAccountNo, g.AccountDescription
+FROM Vendors v
+JOIN GLAccounts g ON v.DefaultAccountNo = g.AccountNo
+ORDER BY g.AccountDescription, v.VendorName
+
 --3. Write a SELECT statement that returns five columns from three tables, all using column aliases:
 -- a. Vendor VendorName column
 -- b. Date InvoiceDate column
