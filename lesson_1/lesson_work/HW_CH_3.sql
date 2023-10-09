@@ -16,7 +16,6 @@ ORDER BY VendorContactFName
 -- b. Total: Column alias for the InvoiceTotal column
 -- c. Credits: Sum of the PaymentTotal and CreditTotal columns
 -- d. Balance: InvoiceTotal minus the sum of paymentTotal and CreditTotal
-SELECT * FROM Invoices
 SELECT InvoiceNumber AS [Number], 
 InvoiceTotal AS [Total],
 PaymentTotal + CreditTotal AS [Credits],
@@ -25,7 +24,15 @@ FROM Invoices
 
 --3. Write a SELECT statement that returns one column from the Vendors table named Full Name.
 --Create this column from the VendorContactFName and VendorContactLName columns. 
---Format is as follows: last name, comma, first name (e.g., “Pence, Michael”). Sort the result by last name, then first name.
+--Format is as follows: last name, comma, first name (e.g., “Pence, Michael”). 
+--Sort the result by last name, 
+SELECT VendorContactLName + ', ' + VendorContactFName AS [Full Name]
+FROM Vendors
+ORDER BY VendorContactLName
+--then first name.
+SELECT VendorContactLName + ', ' + VendorContactFName AS [Full Name]
+FROM Vendors
+ORDER BY VendorContactFName
 
 /* Finance Database */
 
