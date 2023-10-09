@@ -3,17 +3,25 @@
 
 /* AP Database */
 --1. Write a SELECT statement that returns from the Vendors table: VendorContactFName,VendorContactLName, and VendorName. 
---Sort the result set by the last name, then by the first name.
-select VendorContactFName, VendorContactLName, VendorName from Vendors
-order by VendorContactLName
-select VendorContactFName, VendorContactLName, VendorName from Vendors
-order by VendorContactFName
+--Sort the result set by the last name, 
+SELECT VendorContactFName, VendorContactLName, VendorName 
+FROM Vendors
+ORDER BY VendorContactLName
+--then by the first name.
+SELECT VendorContactFName, VendorContactLName, VendorName 
+FROM Vendors
+ORDER BY VendorContactFName
 --2. Write a SELECT statement that returns four columns from the Invoices table:
 -- a. Number: Column alias for InvoiceNumber column
 -- b. Total: Column alias for the InvoiceTotal column
 -- c. Credits: Sum of the PaymentTotal and CreditTotal columns
 -- d. Balance: InvoiceTotal minus the sum of paymentTotal and CreditTotal
-
+SELECT * FROM Invoices
+SELECT InvoiceNumber AS [Number], 
+InvoiceTotal AS [Total],
+PaymentTotal + CreditTotal AS [Credits],
+InvoiceTotal - (PaymentTotal + CreditTotal) AS [Balance] 
+FROM Invoices
 
 --3. Write a SELECT statement that returns one column from the Vendors table named Full Name.
 --Create this column from the VendorContactFName and VendorContactLName columns. 
