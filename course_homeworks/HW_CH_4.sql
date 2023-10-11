@@ -84,18 +84,36 @@ GO
 
 --6. Write a SELECT statement that returns three columns: 
 --Date, closing price for IBM Ticker, and closing price for GLD ticker.
-SELECT ibm.[Date], ibm.[Close] AS [IBM_Close], gld.[Close] AS [GLD_Close]
+SELECT FORMAT(ibm.[Date], 'dd-MMM-yyyy') AS [Date], 
+	FORMAT(ibm.[Close], 'N2') AS [IBM_Close], 
+	FORMAT(gld.[Close], 'N2') AS [GLD_Close]
 FROM TS_DailyData ibm JOIN TS_DailyData gld ON (ibm.[Date]=gld.[Date])
 WHERE ibm.Ticker='IBM' AND gld.Ticker='GLD'
 
 --7. Repeat the previous exercise, this time return the data only for the days on which GLD closed higher than IBM 
-SELECT ibm.[Date], ibm.[Close] AS [IBM_Close], gld.[Close] AS [GLD_Close]
+SELECT FORMAT(ibm.[Date], 'dd-MMM-yyyy') AS [Date], 
+	FORMAT(ibm.[Close], 'N2') AS [IBM_Close], 
+	FORMAT(gld.[Close], 'N2') AS [GLD_Close]
 FROM TS_DailyData ibm JOIN TS_DailyData gld ON (ibm.[Date]=gld.[Date])
 WHERE (ibm.Ticker='IBM' AND gld.Ticker='GLD')
 	AND ibm.[Close] > gld.[Close]
 
 /* Library Database */
+USE LibraryF20
+GO
+
+SELECT *
+FROM LBR_Book
+SELECT *
+FROM LBR_Location
 
 --8. Write a SELECT statement that returns the titles, ISBN numbers, and locations of all the books.
+--using join to get the location names, leaves out a few books with no location listed
+SELECT Title, ISBN, LBR_Book.Location_ID, Location
+FROM LBR_Book JOIN LBR_Location ON (LBR_Book.Location_ID = LBR_Location.Location_ID)
+--using a simple select statement just usind the location ids from the book table include books with no locaiton
+SELECT Title, ISBN, Location_ID
+FROM LBR_Book
+
 --9. Write a SELECT statement that returns the titles of all books, their categories, genres, fields, subfields, and types. Arrange the columns in the order that makes most sense to you. A possible return set might begin:
 --10. Modify the query above to display ‘N/A’ or ‘---’ instead of NULL
