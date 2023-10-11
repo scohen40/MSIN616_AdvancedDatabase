@@ -118,11 +118,16 @@ FROM LBR_Book b LEFT JOIN LBR_BookClassification class ON (b.Classification_ID =
 ORDER BY b.Title
 
 --10. Modify the query above to display ‘N/A’ or ‘---’ instead of NULL
-SELECT * FROM LBR_Book
-SELECT * FROM LBR_BookClassification
-SELECT * FROM LBR_BkCategory
-SELECT * FROM LBR_BkGenre
-SELECT * FROM LBR_BkField
-SELECT * FROM LBR_BkSubField
-SELECT * FROM LBR_BkType
-
+SELECT ISNULL(b.Title, '---') AS Title, 
+	ISNULL(c.Category, '---') AS Category, 
+	ISNULL(t.[Type], '---') AS [Type], 
+	ISNULL(g.Genre, '---') AS Genre,
+	ISNULL(f.Field, '---') AS Field, 
+	ISNULL(s.Subfield, '---') AS Subfield
+FROM LBR_Book b LEFT JOIN LBR_BookClassification class ON (b.Classification_ID = class.Classification_ID)
+	LEFT JOIN LBR_BkCategory c ON (class.Category_ID = c.Category_ID)
+	LEFT JOIN LBR_BkGenre g ON (class.Genre_ID = g.Genre_ID)
+	LEFT JOIN LBR_BkField f ON (class.Field_ID = f.Field_ID)
+	LEFT JOIN LBR_BkSubField s ON (class.SubField_ID = s.Subfield_ID)
+	LEFT JOIN LBR_BkType t ON (class.[Type_ID] = t.[Type_ID])
+ORDER BY b.Title
