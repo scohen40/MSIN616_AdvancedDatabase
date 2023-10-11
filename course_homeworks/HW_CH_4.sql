@@ -102,18 +102,27 @@ WHERE (ibm.Ticker='IBM' AND gld.Ticker='GLD')
 USE LibraryF20
 GO
 
-SELECT *
-FROM LBR_Book
-SELECT *
-FROM LBR_Location
-
 --8. Write a SELECT statement that returns the titles, ISBN numbers, and locations of all the books.
---using join to get the location names, leaves out a few books with no location listed
 SELECT Title, ISBN, LBR_Book.Location_ID, Location
-FROM LBR_Book JOIN LBR_Location ON (LBR_Book.Location_ID = LBR_Location.Location_ID)
---using a simple select statement just usind the location ids from the book table include books with no locaiton
-SELECT Title, ISBN, Location_ID
-FROM LBR_Book
+FROM LBR_Book LEFT JOIN LBR_Location ON (LBR_Book.Location_ID = LBR_Location.Location_ID)
 
---9. Write a SELECT statement that returns the titles of all books, their categories, genres, fields, subfields, and types. Arrange the columns in the order that makes most sense to you. A possible return set might begin:
+--9. Write a SELECT statement that returns the titles of all books, their categories, genres, fields, subfields, and types. 
+--Arrange the columns in the order that makes most sense to you. A possible return set might begin:
+SELECT b.Title, c.Category, t.[Type], g.Genre, f.Field, s.Subfield
+FROM LBR_Book b LEFT JOIN LBR_BookClassification class ON (b.Classification_ID = class.Classification_ID)
+	LEFT JOIN LBR_BkCategory c ON (class.Category_ID = c.Category_ID)
+	LEFT JOIN LBR_BkGenre g ON (class.Genre_ID = g.Genre_ID)
+	LEFT JOIN LBR_BkField f ON (class.Field_ID = f.Field_ID)
+	LEFT JOIN LBR_BkSubField s ON (class.SubField_ID = s.Subfield_ID)
+	LEFT JOIN LBR_BkType t ON (class.[Type_ID] = t.[Type_ID])
+ORDER BY b.Title
+
 --10. Modify the query above to display ‘N/A’ or ‘---’ instead of NULL
+SELECT * FROM LBR_Book
+SELECT * FROM LBR_BookClassification
+SELECT * FROM LBR_BkCategory
+SELECT * FROM LBR_BkGenre
+SELECT * FROM LBR_BkField
+SELECT * FROM LBR_BkSubField
+SELECT * FROM LBR_BkType
+
