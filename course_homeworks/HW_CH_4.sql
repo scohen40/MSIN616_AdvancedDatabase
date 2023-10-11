@@ -82,12 +82,20 @@ Finance Database
 USE Finance
 GO
 
-select * from TS_DailyData
-
 --6. Write a SELECT statement that returns three columns: 
 --Date, closing price for IBM Ticker, and closing price for GLD ticker.
-SELECT [Date]
---7. Repeat the previous exercise, this time return the data only for the days on which GLD closed higher than IBM Library Database
+SELECT ibm.[Date], ibm.[Close] AS [IBM_Close], gld.[Close] AS [GLD_Close]
+FROM TS_DailyData ibm JOIN TS_DailyData gld ON (ibm.[Date]=gld.[Date])
+WHERE ibm.Ticker='IBM' AND gld.Ticker='GLD'
+
+--7. Repeat the previous exercise, this time return the data only for the days on which GLD closed higher than IBM 
+SELECT ibm.[Date], ibm.[Close] AS [IBM_Close], gld.[Close] AS [GLD_Close]
+FROM TS_DailyData ibm JOIN TS_DailyData gld ON (ibm.[Date]=gld.[Date])
+WHERE (ibm.Ticker='IBM' AND gld.Ticker='GLD')
+	AND ibm.[Close] > gld.[Close]
+
+/* Library Database */
+
 --8. Write a SELECT statement that returns the titles, ISBN numbers, and locations of all the books.
 --9. Write a SELECT statement that returns the titles of all books, their categories, genres, fields, subfields, and types. Arrange the columns in the order that makes most sense to you. A possible return set might begin:
 --10. Modify the query above to display ‘N/A’ or ‘---’ instead of NULL
