@@ -63,6 +63,6 @@ GO
 --13. Write a SELECT statement that returns titles of all Computer Science books
 --14. Write a SELECT statement that returns all authors with the number of books they wrote or co-
 --authored ordered by the number of books. Make sure not to miss the author(s) who did not
---write any books in our library. A sample output appears at right
+--write any books in our library. A sample output appears at right (CHECK DOCUMENT FOR PICTURE)
 --15. Write a SELECT statement that returns three fields: The average, minimal, and maximal length
---of a book title:
+--of a book title: (CHECK DOCUMENT FOR PICTURE)
