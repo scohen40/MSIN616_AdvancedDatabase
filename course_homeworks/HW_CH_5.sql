@@ -14,6 +14,10 @@ FROM Invoices
 GROUP BY VendorID
 
 --2. Repeat exercise 1 (above) but this time return VendorName instead of VendorID.
+SELECT VendorName, SUM(PaymentTotal) AS PaymentSum
+FROM Invoices JOIN Vendors ON (Invoices.VendorID = Vendors.VendorID)
+GROUP BY VendorName
+
 --3. Write a SELECT statement to return three columns: VendorName, InvoiceCount, and
 --InvoiceSum. InvoiceCount is the count of the number of invoices, and InvoiceSum is the sum of
 --the InvoiceTotal column. Group the results by vendor. Sort the result set so the vendor with
