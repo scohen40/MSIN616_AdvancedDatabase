@@ -5,10 +5,13 @@
 USE AP
 GO
 
---1. Write a SELECT statement that returns two columns from the Invoice table: VendorID and
---PaymentSum, where PaymentSum is the sum of the PaymentTotal column. Group the resul set
---by VendorID.
-
+--1. Write a SELECT statement that returns two columns from the Invoice table:
+-- VendorID and PaymentSum, where PaymentSum is the sum of the PaymentTotal column. 
+--Group the result set by VendorID.
+SELECT VendorID, 
+	SUM(PaymentTotal) AS PaymentSum
+FROM Invoices
+GROUP BY VendorID
 
 --2. Repeat exercise 1 (above) but this time return VendorName instead of VendorID.
 --3. Write a SELECT statement to return three columns: VendorName, InvoiceCount, and
