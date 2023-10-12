@@ -22,6 +22,13 @@ GROUP BY VendorName
 --InvoiceSum. InvoiceCount is the count of the number of invoices, and InvoiceSum is the sum of
 --the InvoiceTotal column. Group the results by vendor. Sort the result set so the vendor with
 --the highest number of invoices appears first.
+SELECT VendorName,
+	COUNT(*) AS InvoiceCount, 
+	SUM(InvoiceTotal) AS InvoiceSum
+FROM Invoices JOIN Vendors ON (Invoices.VendorID = Vendors.VendorID)
+GROUP BY VendorName
+ORDER BY InvoiceCount DESC
+
 --4. Modify the SELECT statement in 3 above so that they result set is sorted by the InvoiceSum in
 --descending order and is limited to the Vendors with InvoiceSum greater than $500.00
 --Product Orders Database
