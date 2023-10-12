@@ -31,7 +31,16 @@ ORDER BY InvoiceCount DESC
 
 --4. Modify the SELECT statement in 3 above so that they result set is sorted by the InvoiceSum in
 --descending order and is limited to the Vendors with InvoiceSum greater than $500.00
---Product Orders Database
+SELECT VendorName,
+	COUNT(*) AS InvoiceCount, 
+	SUM(InvoiceTotal) AS InvoiceSum
+FROM Invoices JOIN Vendors ON (Invoices.VendorID = Vendors.VendorID)
+GROUP BY VendorName
+HAVING SUM(InvoiceTotal) > 500
+ORDER BY InvoiceSum DESC
+
+/* Product Orders Database */
+
 --5. Write a SELECT statement that returns these columns:
 --a. The count of the number of orders in the Orders table
 --b. The sum of the TaxAmount column in the Orders table
