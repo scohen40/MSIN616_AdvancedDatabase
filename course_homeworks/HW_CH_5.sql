@@ -88,6 +88,14 @@ ORDER BY TotalPrice DESC
 --amount from the price. Then, multiply by the quantity.)
 --Return only those rows where the customer has more than 1 order.
 --Sort the result set in descending sequence by the sum of the line item amounts.
+SELECT Customers.EmailAddress,
+	COUNT(Orders.OrderID) AS CountOrders,
+	SUM((OrderItems.ItemPrice - OrderItems.DiscountAmount) * OrderItems.Quantity) AS  TotalAmount
+FROM Orders LEFT JOIN Customers ON (Orders.CustomerID = Customers.CustomerID)
+	JOIN OrderItems ON (Orders.OrderID = OrderItems.OrderID)
+GROUP BY Customers.EmailAddress
+ORDER BY TotalAmount DESC
+
 --9. Modify the solution to exercise 4 so it only counts and totals line items that have an ItemPrice
 --value that’s greater than 400.
 --10. Write a SELECT statement that answers this question: What is the total amount ordered for each
