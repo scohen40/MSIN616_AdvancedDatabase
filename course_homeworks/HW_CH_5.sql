@@ -40,10 +40,16 @@ HAVING SUM(InvoiceTotal) > 500
 ORDER BY InvoiceSum DESC
 
 /* Product Orders Database */
+USE MyGuitarShop
+GO
 
 --5. Write a SELECT statement that returns these columns:
 --a. The count of the number of orders in the Orders table
 --b. The sum of the TaxAmount column in the Orders table
+SELECT COUNT(*) AS CountOrders,
+	SUM(TaxAmount) As SumTaxAmount
+FROM Orders
+
 --6. Write a SELECT statement that returns one row for each category that has products. The
 --statement should return these columns:
 --a. The CategoryName column from the Categories table
