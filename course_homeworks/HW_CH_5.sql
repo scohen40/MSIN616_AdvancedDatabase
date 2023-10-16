@@ -130,6 +130,12 @@ ORDER BY TotalAmount DESC
 --b. The total amount for each product in the OrderItems table (Hint: You can calculate the
 --total by subtracting the discount amount from the item price and then multiplying it by
 --the quantity)
+SELECT p.ProductName,
+	SUM((oi.ItemPrice - oi.DiscountAmount) * oi.Quantity) AS TotalAmount
+FROM OrderItems oi LEFT JOIN Products p ON (oi.ProductID = p.ProductID)
+GROUP BY p.ProductName
+ORDER BY TotalAmount DESC --added in even though not asked to
+
 --Use the ROLLUP operator to include a row that gives the grand total.
 --11. Write a SELECT statement that answers this question: Which customers have ordered more than
 --one type of product? Return these columns:
