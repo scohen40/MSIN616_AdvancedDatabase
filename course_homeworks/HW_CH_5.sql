@@ -148,9 +148,19 @@ FROM Orders o LEFT JOIN Customers c ON (o.CustomerID = c.CustomerID)
 GROUP BY c.EmailAddress, oi.ProductID WITH ROLLUP
 HAVING COUNT(oi.ProductID) >  1
 
---Library Database
---12. Write a SELECT statement that returns names of all Publishers with number of nonfiction books
---for each publisher.
+/* Library Database */
+USE LibraryF20
+GO
+
+--12. Write a SELECT statement that returns names of all Publishers with number of nonfiction books for each publisher.
+SELECT p.[Name],
+	COUNT(*) AS CountBooks
+FROM LBR_Book b LEFT JOIN LBR_Publisher p ON (b.Publisher_ID = p.Publisher_ID)
+	JOIN LBR_BookClassification class ON (b.Classification_ID = class.Classification_ID)
+	JOIN LBR_BkCategory cat ON(class.Category_ID = cat.Category_ID)
+WHERE cat.Category = 'NonFiction'
+GROUP BY p.[Name]
+
 --13. Write a SELECT statement that returns titles of all Computer Science books
 --14. Write a SELECT statement that returns all authors with the number of books they wrote or co-
 --authored ordered by the number of books. Make sure not to miss the author(s) who did not
