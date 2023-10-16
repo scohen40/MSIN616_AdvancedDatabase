@@ -142,11 +142,11 @@ ORDER BY TotalAmount DESC --added in even though not asked to
 --a. The email address from the Customers table
 --b. The count of distinct products from the customer’s orders
 SELECT c.EmailAddress,
-	COUNT(DISTINCT oi.ProductID) AS CountProducts
+	COUNT(ProductID) AS CountDistinctProducts
 FROM Orders o LEFT JOIN Customers c ON (o.CustomerID = c.CustomerID)
 	JOIN OrderItems oi ON (o.OrderID = oi.OrderID)
-GROUP BY c.EmailAddress WITH ROLLUP
-HAVING COUNT(DISTINCT oi.ProductID) > 1
+GROUP BY c.EmailAddress, oi.ProductID WITH ROLLUP
+HAVING COUNT(oi.ProductID) >  1
 
 --Library Database
 --12. Write a SELECT statement that returns names of all Publishers with number of nonfiction books
