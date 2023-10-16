@@ -94,10 +94,36 @@ SELECT Customers.EmailAddress,
 FROM Orders LEFT JOIN Customers ON (Orders.CustomerID = Customers.CustomerID)
 	JOIN OrderItems ON (Orders.OrderID = OrderItems.OrderID)
 GROUP BY Customers.EmailAddress
+HAVING COUNT(Orders.OrderID) > 1
 ORDER BY TotalAmount DESC
 
---9. Modify the solution to exercise 4 so it only counts and totals line items that have an ItemPrice
---value that’s greater than 400.
+--9. Modify the solution to exercise 4 so it only counts and totals line items that have an ItemPrice value that’s greater than 400.
+
+--ASSUMING THIS IS ACTUALLY SUPPOSED TO MODIFY #4 SHOULD BE MODIFIED TO USE THE 'MY GUITAR SHOP' DATABASE, I USED PIECES FROM #8
+SELECT * FROM Orders 
+SELECT * FROM OrderItems
+SELECT * FROM Customers
+SELECT Customers.EmailAddress,
+	COUNT(Orders.OrderID) AS CountOrders, 
+	SUM((OrderItems.ItemPrice - OrderItems.DiscountAmount) * OrderItems.Quantity) AS  TotalAmount
+FROM Orders LEFT JOIN Customers ON (Orders.CustomerID = Customers.CustomerID)
+	JOIN OrderItems ON (Orders.OrderID = OrderItems.OrderID)
+WHERE OrderItems.ItemPrice > 400
+GROUP BY Customers.EmailAddress
+HAVING SUM((OrderItems.ItemPrice - OrderItems.DiscountAmount) * OrderItems.Quantity) > 500
+ORDER BY TotalAmount DESC
+
+--ASSUMING YOU MEANT TO MODIFY THE SOLUTION TO EXERCISE 8
+SELECT Customers.EmailAddress,
+	COUNT(Orders.OrderID) AS CountOrders,
+	SUM((OrderItems.ItemPrice - OrderItems.DiscountAmount) * OrderItems.Quantity) AS  TotalAmount
+FROM Orders LEFT JOIN Customers ON (Orders.CustomerID = Customers.CustomerID)
+	JOIN OrderItems ON (Orders.OrderID = OrderItems.OrderID)
+WHERE OrderItems.ItemPrice > 400
+GROUP BY Customers.EmailAddress
+HAVING COUNT(Orders.OrderID) > 1
+ORDER BY TotalAmount DESC
+
 --10. Write a SELECT statement that answers this question: What is the total amount ordered for each
 --product? Return these columns:
 --a. The product name from the Products table
