@@ -141,6 +141,13 @@ ORDER BY TotalAmount DESC --added in even though not asked to
 --one type of product? Return these columns:
 --a. The email address from the Customers table
 --b. The count of distinct products from the customer’s orders
+SELECT c.EmailAddress,
+	COUNT(DISTINCT oi.ProductID) AS CountProducts
+FROM Orders o LEFT JOIN Customers c ON (o.CustomerID = c.CustomerID)
+	JOIN OrderItems oi ON (o.OrderID = oi.OrderID)
+GROUP BY c.EmailAddress WITH ROLLUP
+HAVING COUNT(DISTINCT oi.ProductID) > 1
+
 --Library Database
 --12. Write a SELECT statement that returns names of all Publishers with number of nonfiction books
 --for each publisher.
