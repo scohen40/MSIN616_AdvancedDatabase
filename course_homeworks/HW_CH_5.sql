@@ -56,9 +56,6 @@ FROM Orders
 --b. The number of products in each category
 --c. The list price of the most expensive product in each category
 --Sort the result set so the category with the most products appears first.
-SELECT * FROM Orders
-SELECT * FROM Categories
-SELECT * FROM Products
 SELECT Categories.CategoryName, 
 	COUNT(Products.CategoryID) AS CountProduct,
 	MAX(Products.ListPrice) AS MaxPrice
@@ -75,6 +72,14 @@ ORDER BY MAX(Products.ListPrice) DESC
 --discount amount column in the OrderItems table by the quantity in the OrderItems
 --table)
 --Sort the result set in descending sequence by the price total for each customer.
+SELECT Customers.EmailAddress, 
+	SUM(OrderItems.ItemPrice * OrderItems.Quantity) AS TotalPrice,
+	SUM(OrderItems.DiscountAmount * OrderItems.Quantity) AS TotalDiscount
+FROM Orders LEFT JOIN Customers ON (Orders.CustomerID = Customers.CustomerID)
+	JOIN OrderItems ON (Orders.OrderID = OrderItems.OrderID)
+GROUP BY Customers.EmailAddress
+ORDER BY TotalPrice DESC
+
 --8. Write a SELECT statement that returns one row for each customer that has orders. The
 --statement should return these columns:
 --a. The EmailAddress column from the Customers table
