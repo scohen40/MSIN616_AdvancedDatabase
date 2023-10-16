@@ -170,5 +170,19 @@ WHERE f.Field = 'Computer Science'
 --14. Write a SELECT statement that returns all authors with the number of books they wrote or co-
 --authored ordered by the number of books. Make sure not to miss the author(s) who did not
 --write any books in our library. A sample output appears at right (CHECK DOCUMENT FOR PICTURE)
+SELECT ISNULL(a.Title + ' ', '') 
+	+ ISNULL(a.FirstName + ' ', '') 
+	+ ISNULL(a.MiddleInitials + ' ', '') 
+	+ ISNULL(a.LastName + ' ', '')
+	+ ISNULL(a.Suffix + ' ', '') AS Author,
+	COUNT(b.Book_ID) AS NumBooks
+FROM LBR_JNC_AuthorBook b RIGHT JOIN LBR_Author a ON (b.Author_ID = a.Author_ID)
+GROUP BY ISNULL(a.Title + ' ', '') 
+	+ ISNULL(a.FirstName + ' ', '') 
+	+ ISNULL(a.MiddleInitials + ' ', '') 
+	+ ISNULL(a.LastName + ' ', '')
+	+ ISNULL(a.Suffix + ' ', '')
+ORDER BY NumBooks
+
 --15. Write a SELECT statement that returns three fields: The average, minimal, and maximal length
 --of a book title: (CHECK DOCUMENT FOR PICTURE)
