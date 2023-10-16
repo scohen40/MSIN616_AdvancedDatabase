@@ -10,6 +10,13 @@ GO
 -- b.	The second column, Phone, is the VendorPhone column without the area code. 
 --Only return rows for those vendors in the 559 area code. Sort the result set by first name, then last name.
 
+--ASSUMING NO NAME FIELDS ARE NULL, AND WE DON'T WANT TO INCLUDE THE NULL PHONE NUMBERS
+SELECT VendorContactFName + ' ' + LEFT(VendorContactLName, 1) + '.' AS VendorContactName,
+	RIGHT(VendorPhone, 8) AS VendorPhone
+FROM Vendors
+WHERE LEFT(VendorPhone, 4) != '(559' 
+ORDER BY VendorContactFName, VendorContactLName
+
 --2.	Write a SELECT statement that returns the InvoiceNumber and balance due for every invoice with a non-zero balance and an InvoiceDueDate that’s less than 30 days from today.
 
 --3.	Modify the search expression for InvoiceDueDate from the solution for 2b.
