@@ -186,3 +186,7 @@ ORDER BY NumBooks
 
 --15. Write a SELECT statement that returns three fields: The average, minimal, and maximal length
 --of a book title: (CHECK DOCUMENT FOR PICTURE)
+SELECT AVG(LEN(Title)) AS 'Average length of a book title',
+	MIN(LEN(Title)) AS 'Min length of a book title',
+	MAX(LEN(Title)) AS 'Max length of a book title'
+FROM LBR_Book
