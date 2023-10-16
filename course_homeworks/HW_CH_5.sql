@@ -162,6 +162,11 @@ WHERE cat.Category = 'NonFiction'
 GROUP BY p.[Name]
 
 --13. Write a SELECT statement that returns titles of all Computer Science books
+SELECT b.Title 
+FROM LBR_Book b JOIN LBR_BookClassification class ON (b.Classification_ID = class.Classification_ID)
+	JOIN LBR_BkField f ON (class.Field_ID = f.Field_ID)
+WHERE f.Field = 'Computer Science'
+
 --14. Write a SELECT statement that returns all authors with the number of books they wrote or co-
 --authored ordered by the number of books. Make sure not to miss the author(s) who did not
 --write any books in our library. A sample output appears at right (CHECK DOCUMENT FOR PICTURE)
