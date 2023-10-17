@@ -17,7 +17,12 @@ FROM Vendors
 WHERE LEFT(VendorPhone, 4) != '(559' 
 ORDER BY VendorContactFName, VendorContactLName
 
---2.	Write a SELECT statement that returns the InvoiceNumber and balance due for every invoice with a non-zero balance and an InvoiceDueDate that’s less than 30 days from today.
+--2.	Write a SELECT statement that returns the InvoiceNumber and balance due 
+--for every invoice with a non-zero balance and an InvoiceDueDate that’s less than 30 days from today.
+SELECT * FROM Invoices
+SELECT InvoiceNumber, (InvoiceTotal - (PaymentTotal + CreditTotal)) AS BalanceDue--DATEDIFF(DAY, GETDATE(), InvoiceDueDate)
+FROM Invoices
+WHERE (InvoiceTotal - (PaymentTotal + CreditTotal) != 0) AND (DATEDIFF(DAY, InvoiceDueDate, GETDATE()) < 30))
 
 --3.	Modify the search expression for InvoiceDueDate from the solution for 2b.
 --Rather than 30 days from today, return invoices due before the last day of the current month.
