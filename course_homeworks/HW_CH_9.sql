@@ -37,9 +37,6 @@ WHERE (InvoiceTotal - PaymentTotal - CreditTotal != 0) AND (InvoiceDueDate < (DA
 --4.	Write a summary query WITH CUBE that returns LineItemSum (which is the sum of InvoiceLineItemAmount) 
 --grouped by Account (an alias for AccountDescription) and State (an alias for VendorState). 
 --Use the CASE and GROUPING function to substitute the literal value “*ALL*” for the summary rows with null values.
-SELECT * FROM Invoices
-SELECT * FROM InvoiceLineItems
-SELECT * FROM GLAccounts
 SELECT 
 	CASE
 		WHEN GROUPING(gla.AccountDescription) = 1 THEN '*ALL*' 
@@ -58,6 +55,14 @@ GROUP BY CUBE(gla.AccountDescription, v.VendorState)
 ORDER BY Account DESC, [State] DESC 
 
 --5.	Add a column to the query described in 2d that uses the RANK() function to return a column named BalanceRank that ranks the balance due in descending order.
+
+--ASSUMING THE QUESTION IS ASKING FOR A MODIFICATION OF QUESTION 3
+SELECT 
+	RANK() OVER (ORDER BY (InvoiceTotal - PaymentTotal - CreditTotal)) AS BalanceRank,
+	InvoiceNumber, 
+	(InvoiceTotal - PaymentTotal - CreditTotal) AS BalanceDue
+FROM Invoices
+WHERE (InvoiceTotal - PaymentTotal - CreditTotal != 0) AND (InvoiceDueDate < (DATEADD(DAY, -1, DATEFROMPARTS(YEAR(GETDATE()),MONTH(GETDATE())+1,1))) )
 
 /* My Guitar Shop Database */
 USE MyGuitarShop
