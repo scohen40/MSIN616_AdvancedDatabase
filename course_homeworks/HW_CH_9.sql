@@ -26,7 +26,13 @@ FROM Invoices
 WHERE (InvoiceTotal - PaymentTotal - CreditTotal != 0) AND (DATEDIFF(DAY, InvoiceDueDate, GETDATE()) < 30)
 
 --3.	Modify the search expression for InvoiceDueDate from the solution for 2b.
---Rather than 30 days from today, return invoices due before the last day of the current month.
+--Rather than 30 days from today, return invoices due before the last day of the current month. 
+SELECT InvoiceNumber, 
+	(InvoiceTotal - PaymentTotal - CreditTotal) AS BalanceDue,
+	(DATEADD(DAY, -1, DATEFROMPARTS(YEAR(GETDATE()),MONTH(GETDATE())+1,1))) AS EndOfCurrentMonth, --added for better data view
+	InvoiceDueDate --added for better data view
+FROM Invoices
+WHERE (InvoiceTotal - PaymentTotal - CreditTotal != 0) AND (InvoiceDueDate < (DATEADD(DAY, -1, DATEFROMPARTS(YEAR(GETDATE()),MONTH(GETDATE())+1,1))) )
 
 --4.	Write a summary query WITH CUBE that returns LineItemSum (which is the sum of InvoiceLineItemAmount) 
 --grouped by Account (an alias for AccountDescription) and State (an alias for VendorState). 
