@@ -110,3 +110,10 @@ FROM Orders
 -- d.	The ShipDate column
 -- e.	A column named DaysToShip that shows the number of days between the order date and the ship date
 --When you get that working right, add a WHERE clause that retrieves just the orders placed in January 2023.
+SELECT OrderID, 
+	OrderDate,
+	DATEADD(DAY, 2, OrderDate) AS ApproxShipDate,
+	ShipDate,
+	DATEDIFF(DAY, OrderDate, ShipDate) AS DaysToShip
+FROM Orders
+WHERE (MONTH(OrderDate) = '1') AND (YEAR(OrderDate) = '2023')
