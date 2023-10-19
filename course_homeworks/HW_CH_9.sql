@@ -97,6 +97,11 @@ ORDER BY OrderDate
 --When you get that working right, add the column that follows to the result set. This is more difficult because the column requires you to nest functions within functions.
 --A column that displays the last four digits of the CardNumber column in this format: XXXX-XXXX-XXXX-1234. 
 --In other words, use Xs for the first 12 digits of the card number and actual numbers for the last four digits of the number.
+SELECT CardNumber, 
+	LEN(CardNumber) AS CardNumLength,
+	RIGHT(CardNumber, 4) AS Last4Digits,
+	CONCAT('XXXX-XXXX-XXXX-', RIGHT(CardNumber, 4)) AS XCardNum 
+FROM Orders
 
 --9.	Write a SELECT statement that returns these columns from the Orders table:
 -- a.	The OrderID column
