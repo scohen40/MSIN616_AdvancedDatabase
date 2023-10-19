@@ -83,8 +83,12 @@ FROM Products
 -- b.	A column that returns only the four-digit year that’s stored in the OrderDate column
 -- c.	A column that returns only the day of the month that’s stored in the OrderDate column
 -- d.	A column that returns the result from adding thirty days to the OrderDate column
-
-
+SELECT OrderDate,
+	YEAR(OrderDate) AS OrderYear,
+	DAY(OrderDate) AS OrderDayOfMonth,
+	DATEADD(DAY, 30, OrderDate) AS OrderDatePlus30Days
+FROM Orders
+ORDER BY OrderDate
 
 --8.	Write a SELECT statement that returns these columns from the Orders table:
 -- a.	The CardNumber column
