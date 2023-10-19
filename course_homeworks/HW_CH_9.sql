@@ -73,7 +73,6 @@ GO
 -- b.	The DiscountPercent column
 -- c.	A column named DiscountAmount that uses the previous two columns to calculate the discount amount and uses the ROUND function to round the result to 2 decimal places
 --(Note: Even though the result will be rounded, you may still have more than two zeroes after the decimal place as the data type does not change with ROUND.)
-SELECT * FROM Products
 SELECT ListPrice, 
 	DiscountPercent,
 	ROUND(ListPrice - (ListPrice * (DiscountPercent * .01)), 2) AS DiscountAmount
@@ -84,6 +83,8 @@ FROM Products
 -- b.	A column that returns only the four-digit year that’s stored in the OrderDate column
 -- c.	A column that returns only the day of the month that’s stored in the OrderDate column
 -- d.	A column that returns the result from adding thirty days to the OrderDate column
+
+
 
 --8.	Write a SELECT statement that returns these columns from the Orders table:
 -- a.	The CardNumber column
