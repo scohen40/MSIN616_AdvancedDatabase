@@ -36,6 +36,14 @@ ORDER BY ListPrice DESC
 --3. Write a SELECT statement that returns the CategoryName column from the Categories table. 
 --Return one row for each category that has never been assigned to any product in the Products table. 
 --To do that, use a subquery introduced with NOT EXISTS.
+SELECT * FROM Categories
+SELECT CategoryName
+FROM Categories
+WHERE NOT EXISTS (
+	SELECT DISTINCT Categories.CategoryName
+	FROM Products
+	JOIN Categories ON Products.CategoryID = Categories.CategoryID
+)
 
 --4. Write a SELECT statement that returns three columns: EmailAddress, OrderID, and the order total for each order. 
 --To do this, you can group the result set by the EmailAddress and OrderID columns. Then, you can calculate the order total from the columns in the OrderItems table.
