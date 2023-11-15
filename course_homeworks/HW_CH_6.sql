@@ -21,9 +21,17 @@ WHERE CategoryID IN (
 	FROM Products
 )
 
---2. Write a SELECT statement that answers this question: Which products have a list price that’s greater than the average list price for all products?
+--2. Write a SELECT statement that answers this question: 
+--Which products have a list price that’s greater than the average list price for all products?
 --a. Return the ProductName and ListPrice columns for each product.
 --b. Sort the results by the ListPrice column in descending sequence.
+SELECT ProductName, ListPrice
+FROM Products
+WHERE ListPrice > (
+	SELECT AVG(ListPrice)
+	FROM Products
+)
+ORDER BY ListPrice DESC
 
 --3. Write a SELECT statement that returns the CategoryName column from the Categories table. 
 --Return one row for each category that has never been assigned to any product in the Products table. 
