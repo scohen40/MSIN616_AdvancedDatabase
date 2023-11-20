@@ -81,4 +81,19 @@ FROM ( SELECT DiscountPercent, COUNT(DiscountPercent) AS PercentCount
 	   HAVING COUNT(DiscountPercent) = 1 ) AS p1
 ORDER BY ProductName
 
---6. Use a correlated subquery to return one row per customer with each customer’s oldest order (the one with the earliest date). Each row should include these three columns: EmailAddress, OrderID, and OrderDate.
+--6. Use a correlated subquery to return one row per customer with each customer’s oldest order (the one with the earliest date). 
+--Each row should include these three columns: EmailAddress, OrderID, and OrderDate.
+SELECT 
+	( SELECT c.EmailAddress
+	  FROM Customers c
+	  WHERE c.CustomerID = o.CustomerID ) AS EmailAddress,
+	o.OrderID,
+	o.OrderDate
+FROM Orders o
+WHERE o.OrderDate in (
+	SELECT MIN(OrderDate) AS EarliestDate 
+	FROM Orders
+	GROUP BY CustomerID
+)
+
+
