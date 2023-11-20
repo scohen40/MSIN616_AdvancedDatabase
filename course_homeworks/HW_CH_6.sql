@@ -66,4 +66,19 @@ ORDER BY LargestOrder DESC
 --In other words, don’t include products that have the same discount percent as another product.
 --Sort the results by the ProductName column.
 
+--Steps:
+--get all the count for all discount percents with a count of 1
+--get the name and discount percents from the result of the first select statement
+--order by ProductName
+SELECT
+	(SELECT p2.ProductName
+	 FROM Products p2
+	 WHERE p2.DiscountPercent = p1.DiscountPercent) AS ProductName,
+	p1.DiscountPercent
+FROM ( SELECT DiscountPercent, COUNT(DiscountPercent) AS PercentCount
+	   FROM Products
+       GROUP BY DiscountPercent 
+	   HAVING COUNT(DiscountPercent) = 1 ) AS p1
+ORDER BY ProductName
+
 --6. Use a correlated subquery to return one row per customer with each customer’s oldest order (the one with the earliest date). Each row should include these three columns: EmailAddress, OrderID, and OrderDate.
