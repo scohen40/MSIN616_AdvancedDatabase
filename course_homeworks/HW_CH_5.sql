@@ -61,7 +61,8 @@ SELECT Categories.CategoryName,
 	MAX(Products.ListPrice) AS MaxPrice
 FROM Products JOIN Categories ON (Products.CategoryID = Categories.CategoryID)
 GROUP BY Categories.CategoryName
-ORDER BY MAX(Products.ListPrice) DESC 
+--ORDER BY MAX(Products.ListPrice) DESC 
+ORDER BY MaxPrice --CORRECTION, SHOULD USE ALIAS
 
 --7. Write a SELECT statement that returns one row for each customer that has orders. The
 --statement should return these columns:
@@ -124,6 +125,7 @@ GROUP BY Customers.EmailAddress
 HAVING COUNT(Orders.OrderID) > 1
 ORDER BY TotalAmount DESC
 
+-- *** COMMENT: DIDN'T PROPERLY USE ROLLUP? IT WASN'T ASKED FOR IN THIS PROBLEM
 --10. Write a SELECT statement that answers this question: What is the total amount ordered for each
 --product? Return these columns:
 --a. The product name from the Products table
@@ -137,6 +139,7 @@ GROUP BY p.ProductName
 ORDER BY TotalAmount DESC --added in even though not asked to
 
 --Use the ROLLUP operator to include a row that gives the grand total.
+
 --11. Write a SELECT statement that answers this question: Which customers have ordered more than
 --one type of product? Return these columns:
 --a. The email address from the Customers table
@@ -145,7 +148,7 @@ SELECT c.EmailAddress,
 	COUNT(ProductID) AS CountDistinctProducts
 FROM Orders o LEFT JOIN Customers c ON (o.CustomerID = c.CustomerID)
 	JOIN OrderItems oi ON (o.OrderID = oi.OrderID)
-GROUP BY c.EmailAddress, oi.ProductID WITH ROLLUP
+GROUP BY c.EmailAddress, oi.ProductID WITH ROLLUP -- ** CORRECTION SAID WASN'T USED PROPERLY? HOW TO USE??
 HAVING COUNT(oi.ProductID) >  1
 
 /* Library Database */
