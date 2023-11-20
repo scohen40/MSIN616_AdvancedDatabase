@@ -40,9 +40,9 @@ SELECT * FROM Categories
 SELECT CategoryName
 FROM Categories
 WHERE NOT EXISTS (
-	SELECT DISTINCT Categories.CategoryName
+	SELECT *
 	FROM Products
-	JOIN Categories ON Products.CategoryID = Categories.CategoryID
+	WHERE Products.CategoryID = Categories.CategoryID
 )
 
 --4. Write a SELECT statement that returns three columns: EmailAddress, OrderID, and the order total for each order. 
