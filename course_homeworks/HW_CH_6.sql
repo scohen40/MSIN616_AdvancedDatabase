@@ -36,7 +36,6 @@ ORDER BY ListPrice DESC
 --3. Write a SELECT statement that returns the CategoryName column from the Categories table. 
 --Return one row for each category that has never been assigned to any product in the Products table. 
 --To do that, use a subquery introduced with NOT EXISTS.
-SELECT * FROM Categories
 SELECT CategoryName
 FROM Categories
 WHERE NOT EXISTS (
@@ -46,9 +45,22 @@ WHERE NOT EXISTS (
 )
 
 --4. Write a SELECT statement that returns three columns: EmailAddress, OrderID, and the order total for each order. 
---To do this, you can group the result set by the EmailAddress and OrderID columns. Then, you can calculate the order total from the columns in the OrderItems table.
+--	To do this, you can group the result set by the EmailAddress and OrderID columns. 
+--	Then, you can calculate the order total from the columns in the OrderItems table.
 --Write a second SELECT statement that uses the first SELECT statement in its FROM clause. 
---The main query should return two columns: the customer’s email address and the largest order for that customer. To do this, you can group the result set by the EmailAddress column.
+--	The main query should return two columns: the customer’s email address and the largest order for that customer. 
+--	To do this, you can group the result set by the EmailAddress column.
+SELECT EmailAddress, MAX(OrderTotal) AS LargestOrder
+FROM ( SELECT o.OrderID, 
+		(SELECT c.EmailAddress 
+			FROM Customers c
+			WHERE c.CustomerID = o.CustomerID) AS EmailAddress, 
+		(SELECT SUM((oi.ItemPrice - oi.DiscountAmount) * oi.Quantity)
+			FROM OrderItems oi
+			WHERE oi.OrderID = o.OrderID) AS OrderTotal
+	   FROM Orders o ) AS SummaryTable
+GROUP BY EmailAddress
+ORDER BY LargestOrder DESC
 
 --5. Write a SELECT statement that returns the name and discount percent for each product that has a unique discount percent. 
 --In other words, don’t include products that have the same discount percent as another product.
