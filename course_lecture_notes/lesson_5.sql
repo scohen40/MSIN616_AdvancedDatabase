@@ -89,6 +89,101 @@ select v.VendorName,
 from Vendors v
 
 
+/*
+10/23/2023
+One thing to always remember about subqueries is breaking down the steps.
+
+Mostly they are in JOINs.
+Problem is you can have subq's with a million joins in them and they get very complex and confusing.
+So instead we can use a CTE.
+
+CTE
+
+*/
+--QUESTION: Get the top Vendor in each state based on the sum of all their Invoice totals
+
+--steps:
+--get vendors in states
+--get the sum of all invoices
+--get the top vendors by state
+
+--How to get vendors in states, and throw in what their invoice totals are
+--make this into a cte
+
+SELECT  VendorName, 
+		VendorState,
+		SUM(i.InvoiceTotal) AS Sum_Inv_Total
+	FROM Vendors v
+	JOIN Invoices i ON v.VendorID = i.VendorID 
+	GROUP BY v.VendorName, v.VendorState;
+
+WITH sum_i_total_table AS (
+	SELECT  VendorName, 
+			VendorState,
+			SUM(i.InvoiceTotal) AS Sum_Inv_Total
+	FROM Vendors v
+	JOIN Invoices i ON v.VendorID = i.VendorID 
+	GROUP BY v.VendorName, 
+			v.VendorState
+), top_in_state AS ( 
+	SELECT VendorState,
+			MAX(Sum_Inv_Total) AS Max_Inv_Total
+	FROM sum_i_total_table
+	GROUP BY VendorState
+)
+SELECT * 
+FROM sum_i_total_table sitt
+JOIN top_in_state t ON sitt.VendorState = t.VendorState
+	AND sitt.sum_inv_total = t.max_inv_total;
+
+
+
+--RECURSIVE CTEs 
+--recursion is when you need the answer to answer the question
+
+
+--ALL fxn
+--Get a list of Vendors and their Invoices where the Invoice Total is greater than ALL of the InvoiceTotals for VendorID 34
+
+--get all the vendors and their invoices with a join
+--get the invoice totals > vendor34's totals
+
+SELECT v.VendorID, 
+	v.VendorName,
+	i.InvoiceNumber,
+	i.InvoiceTotal
+FROM Vendors v
+JOIN Invoices i on v.VendorID = i.VendorID
+WHERE i.InvoiceTotal > ALL (
+	SELECT InvoiceTotal
+	FROM Invoices
+	WHERE VendorID = 34
+	)
+
+--ANY fxn - greater than any one of them
+SELECT v.VendorID, 
+	v.VendorName,
+	i.InvoiceNumber,
+	i.InvoiceTotal
+FROM Vendors v
+JOIN Invoices i on v.VendorID = i.VendorID
+WHERE i.InvoiceTotal > ANY (
+	SELECT InvoiceTotal
+	FROM Invoices
+	WHERE VendorID = 34
+	)
+
+--Exist or Not Exist
+
+--QUESTION: Get vendors with no invoices
+SELECT * 
+FROM Vendors v
+WHERE NOT EXISTS(
+	SELECT *
+	FROM Invoices i
+	WHERE i.VendorID = v.VendorID --correlated subquery because doing it inside
+)
+
 
 
 
