@@ -95,5 +95,3 @@ WHERE o.OrderDate in (
 	FROM Orders
 	GROUP BY CustomerID
 )
-
-
