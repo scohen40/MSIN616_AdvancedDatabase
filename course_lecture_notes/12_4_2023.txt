@@ -1,0 +1,50 @@
+Final:
+will be including chapter 13 views, know code and concepts
+from 12/4/2023 on you don't have to know code, just concepts
+
+Chapter 13
+Scripting
+
+1. A script is a series of SQL statements that you can store in a file.
+2. Each script can contain one or more batches that are execited as a unit.
+3. To signal the end of a batch you use the GO command.
+	a. GO command isn't required after the last batch in a script or for a script that contains a single batch.
+	b. If a statement must be executed before the statements that follow can succeed, you should include a GO command after it.
+4. the statements within a batch are executed in the order they appear in a batch.
+
+statements that need their own batch: view, procedure, function, trigger, schema
+
+Keywords you'd use in a script: 
+USE - changes the database context 
+PRINT - returns a message to the client (console)
+DECLARE - declares a local variable
+SET - sets the value of a local variable or a session variable
+EXEC - execute a particular stored procedure that you already have or a SQL statement
+
+Control the flow:
+IF...ELSE
+BEGIN...END - defines a statement block
+WHILE
+BREAK
+CONTINUE
+TRY...CATCH
+GOTO - will make program go out of order
+RETURN - will make program go out of order
+
+Variables:
+2 types - Scalar and Table
+Scalar variable - contain a single value (declare and set)
+Table variable - standard, view , temp , table, derived
+
+Variable scope:
+Scope - which code can access the variable
+Local - only particular parts of the code
+Global - all code
+In a SQL script, a variable's scope is the batch in which it's defined.
+
+
+For next week, think abou the acid principles and come up with what you think your trigger and stored procedure should be and step by step.
+Trigger - someone returns a book, what happens, automatically with no user input
+Stored Procedure - someone checks out a book, something that needs to be kicked off
+
+
