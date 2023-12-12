@@ -70,7 +70,7 @@ will be given a spreadsheet and asked to design a well designed, unmessed data, 
 
 Need to know the Normal Forms COLD. If you study 1 thing it should be that.
 
-ANYTHING AFTER CHAPTER 13 IS NOT ON THE FINAL (VIEWS IS THE LAST THING)
+ANYTHING AFTER CHAPTER 13 THE CODE IS NOT BEING TESTED ON IN THE FINAL, KNOW CONCEPTS LIKE ACID AFTER THAT
 
 
 
