@@ -24,7 +24,7 @@ END
 GO
 
 
-/* STORED PROCEDURE: Check if a Library_Card is active before allowing a book to be borrowed on it. */
+/* STORED PROCEDURE: Check if a Library_Card is active. */
 
 CREATE PROCEDURE PROC_BOOK_BORROWED_INSERT
 	@CardID INT
@@ -32,8 +32,7 @@ AS
 BEGIN
 	--get the card details for the card from the Library_Card table
 	--check if the card is active
-	--if it's active, insert the data
-	--if it's not, raise an error and don't allow the entry into the Book_Borrowed table
+	--print if is and expiration date
 
 END
 GO
