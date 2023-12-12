@@ -72,6 +72,76 @@ Need to know the Normal Forms COLD. If you study 1 thing it should be that.
 
 ANYTHING AFTER CHAPTER 13 THE CODE IS NOT BEING TESTED ON IN THE FINAL, KNOW CONCEPTS LIKE ACID AFTER THAT
 
+review:
+page 22 - look at this sheet and try applying the normal forms
+understand data types
+understand fully qualified table names
+keys
+relationships between tables
+ddl
+dml
+crud
+update, alter, drop
+create table
+altering table
+select statements
+sql coding normas page 41 !! must use on the final, if can't understand, can't give credit
+comments, don't be afraid to use
+chapter 3 you should know COLD
+TOP WITH TIES
+WHERE with LIKEs
+When can you use an alias
+offset and fetch might not have a question
+1 schools of thought - try and pull data as cleanly as possible on the final, she'd rather finish the test
+JOINs - you better know ALL the different types of joins
+SET operators are important 
+Aggregating and Summarizing
+page 118 - know FLAWlessless
+page 119 review
+group by
+count(*) with group by
+rollup
+cube 
+grouping sets
+over and partition by - doesn't think she asked about this but will confirm later, can prop skip
+can prob skip moving averages
+chapter 9 - just know the functions but don't memorize 
+number functions are simple
+date - don't spent so much time memorizing
+MUST know CASE statements
+IIF
+CHOOSE - know it exists
+IS NULL
+COALESCE
+ORDERING AND RANKING
+
+KNOW SUBQUERIES
+would recommend using CTE's but can also use subqueries
+all, any, exists, doens't think she asked about it
+
+Chapter 10 - know super well and tie back to the library spreadsheet
+
+Dependency Diagrams - doesn't think she asked us to draw but asked what it is
+what an ERD is, absolutely know ERDs
+
+Review Active Directories a little bit, what Azure is, what AD is and what Authorization is
+understand the different types of backups
+what recovery is
+how to create a db
+key constraints
+altering dbs
+
+read through ap db creation script
+
+chapter 12 - easier way but don't have to demostrate
+
+views absolutely know
+
+from Chapter 14 and on, know only the concepts, no code
+understand variable scope
+transactions - what it is, diff between physical and logical
+ACID properties
+differences between Triggers, Transactions, and Stored Procedures
 
 
 
