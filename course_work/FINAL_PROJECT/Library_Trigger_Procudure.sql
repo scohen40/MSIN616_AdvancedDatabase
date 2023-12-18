@@ -1,9 +1,11 @@
 /*
 Sarah Cohen and Abhilasha Hirawat
-This file contains the rough ideas and outlines for the Library's Trigger and Stored Procedure.
+This file contains the Library's Trigger and Stored Procedure.
 */
 
 /* TRIGGER: Update the return date of Book_Borrowed when the status is changed to 'RETURNED' */
+USE PublicLibrary
+GO
 
 CREATE TRIGGER TRIG_BOOK_BORROWED_UPDATE
 ON BOOK_BORROWED
@@ -15,13 +17,20 @@ BEGIN
 	BEGIN
 		UPDATE BOOK_BORROWED
 		SET Returned_Date = GETDATE()
-		FROM BOOK_BORROWED bb
-		INNER JOIN interted i ON bb.Borrowed_ID = i.Borrowed_ID
-		WHERE i.Returned_Date IS NULL AND i.Borrowed_Status = 'RETURNED';
+		FROM BOOK_BORROWED
+		WHERE Returned_Date IS NULL AND Borrowed_Status = 'RETURNED'
 	END
 
 END
 GO
+
+--TEST TRIG_BOOK_BORROWED_UPDATE
+SELECT * FROM BOOK_BORROWED
+UPDATE BOOK_BORROWED
+SET Borrowed_Status = 'RETURNED'
+WHERE Borrowed_ID = 2 --EDIT THIS NUMBER FOR A BOOK STILL CHECKED OUT
+SELECT * FROM BOOK_BORROWED
+
 
 
 /* STORED PROCEDURE: Check if a Library_Card is active. */
